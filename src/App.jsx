@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
+import Contador from "./Contador"
 
 function App() {
 
-  const [todos, setTodos] = useState([]);
+  /* const [todos, setTodos] = useState([]);
 
   useEffect( () => {
     async function buscaDados(){
@@ -30,7 +31,14 @@ function App() {
         })}
       </ol>
     </div>
+  ) */
+  return(
+    <div className="App">
+      <Contador />
+  </div>
   )
+ 
+  
 }
 
 export default App

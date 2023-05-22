@@ -1,4 +1,5 @@
 import { useState } from "react"
+import styles from './btn.module.css'
 
 export default function Contador(){
 
@@ -12,12 +13,12 @@ export default function Contador(){
         setCount(count - 1)
     }
     return (
-        <div>
+        <div className="container">
             <h1>Contador</h1>
             {count > 9 ? <h1>Valor alto</h1> : null}
             <h3>{count}</h3>
-            <button onClick={incrementaContador}>Clicar pra aumentar</button>
-            <button onClick={diminuiContador}>Clicar pra diminuir</button>
+            <button className={styles.myBtn} onClick={incrementaContador}>Clicar pra aumentar</button>
+            <button className={styles.myBtn} onClick={diminuiContador}>Clicar pra diminuir</button>
         </div>
     )
 }
