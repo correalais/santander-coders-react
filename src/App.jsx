@@ -1,39 +1,34 @@
 import { useEffect, useState } from "react"
 
-const lista = [{id: 1, value: 'Banana'}, {id: 2, value: 'Maçã'}, {id: 3, value: 'Laranja'}]
-
 function App() {
 
-  const [produtos, setProdutos] = useState(lista)
-  const [pesquisa, setPesquisa] = useState('')
+  const [todos, setTodos] = useState([]);
 
-  useEffect(
-    () => {
-        if (pesquisa) {
-          const novaLista = lista.filter( (item) => {
-            return item.value.toLowerCase().includes(pesquisa.toLowerCase())
-        })
-        setProdutos(novaLista);
-      } else {
-        setProdutos(lista);
-      }
+  useEffect( () => {
+    async function buscaDados(){
+      const result = await fetch('https://jsonplaceholder.typicode.com/todos');
+      const resultadoFinal = await result.json();
+
+      return resultadoFinal;
     }
-      
-  , [pesquisa])
+
+    buscaDados().then(res => setTodos(res));
+  }, [])
 
   return (
     <div className='App'>
-      <input 
-      value={pesquisa}
-      onChange={ (e) => setPesquisa(e.target.value)}
-      placeholder="pesquisar"></input>
-      {produtos.map( (item) => {
-        return (
-          <div key={item.id}>
-            <h4>{item.value}</h4>
-          </div>
-        )
-      })}
+      <h1>Buscando dados</h1>
+      <ol>
+        {todos.map( (todo) => {
+          return(
+
+               <li key={todo.id}>{todo.title} - 
+               {todo.completed ? 'Tarefa Concluída' : null}</li>
+
+           
+          )         
+        })}
+      </ol>
     </div>
   )
 }
